@@ -1,0 +1,41 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'transaction/index.css'%}">
+  </head>
+  <body>
+    <div class="wrapper">
+      <div><span class="dot"></span></div>
+      <div><span class="dot"></span></div>
+      <div><span class="dot"></span></div>
+      <div><span class="dot"></span></div>
+      <div><span class="dot"></span></div>
+      <div><span class="dot"></span></div>
+      <div><span class="dot"></span></div>
+      <div><span class="dot"></span></div>
+      <div><span class="dot"></span></div>
+      <div><span class="dot"></span></div>
+      <div><span class="dot"></span></div>
+      <div><span class="dot"></span></div>
+      <div><span class="dot"></span></div>
+      <div><span class="dot"></span></div>
+      <div><span class="dot"></span></div>
+      <form action="" method="post">
+        {% csrf_token %}
+        <h3>OTP Verification</h3>
+        <label for="cvv">Mobile OTP</label>
+        <input type="password" placeholder="Mobile OTP" name='m_otp'>
+        <br>
+        <br>
+        <label for="cvv">Email OTP</label>
+        <input type="password" placeholder="Email OTP" name='e_otp'>
+        <br>
+        <br>
+        <button type="submit">For OTP Verification</button>
+    </form>
+  </div>
+  </body>
+</html>

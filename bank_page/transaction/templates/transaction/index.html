@@ -1,0 +1,55 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'transaction/index.css'%}">
+  </head>
+  <body>
+    <div class="wrapper">
+      <div><span class="dot"></span></div>
+      <div><span class="dot"></span></div>
+      <div><span class="dot"></span></div>
+      <div><span class="dot"></span></div>
+      <div><span class="dot"></span></div>
+      <div><span class="dot"></span></div>
+      <div><span class="dot"></span></div>
+      <div><span class="dot"></span></div>
+      <div><span class="dot"></span></div>
+      <div><span class="dot"></span></div>
+      <div><span class="dot"></span></div>
+      <div><span class="dot"></span></div>
+      <div><span class="dot"></span></div>
+      <div><span class="dot"></span></div>
+      <div><span class="dot"></span></div>
+      <form action="" method="post">
+        {% csrf_token %}
+        <h3>Make Transaction</h3>
+        <br>
+        <br>
+        <label for="card">Card Number</label>
+        <input type="text" placeholder="Enter Card number" name="number">
+        <br>
+        <br>
+        <label for="name">Card Holder Name</label>
+        <input type="text" placeholder="holder_name" name="holder_name">
+        <br>
+        <br>
+        <label for="month">Month</label>
+        <input type="text" placeholder="Enter month" name="month">
+        <br>
+        <br>
+        <label for="year">Year</label>
+        <input type="text" placeholder="Enter year" name="year">
+        <br>
+        <br>
+        <label for="cvv">CVV</label>
+        <input type="password" placeholder="Enter CVV" name='cvc'>
+        <br>
+        <br>
+        <button type="submit">For OTP Verification</button>
+    </form>
+  </div>
+  </body>
+</html>
