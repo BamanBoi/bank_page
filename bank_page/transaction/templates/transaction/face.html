@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Document</title>
+    <style>
+        #my_camera{
+            width: 320px;
+            height: 240px;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <div>
+       <div>
+        <label >Capture live photo</label>
+        <div id="my_camera"></div>
+        <form action="" method="post"><input type="hidden" name="captured_image_data"></form>
+        
+        <br>
+        <input type="button" value="Take Snap" onclick="take_pic()">
+       </div>
+       <div>
+        <label >Result</label>
+        <div id="results">
+            <img src="https://www.geo.tv/assets/uploads/updates/2023-04-04/480193_9376442_updates.jpg" alt="">
+        </div>
+        <br>
+        <button onclick="save_img()">Save Picture</button>
+       </div>
+    </div>
+</body>
+<script type="text/javascript" src="webcamjs/webcam.min.js"></script>
+<script language="JavaScript">
+    Webcam.set({
+        width: 320,
+        height: 240,
+        image_format:'jpeg',
+        jpeg_quality:90
+    });
+    Webcam.attach( '#my_camera' );
+
+    function take_pic(){
+        Webcam.snap( function(data_uri){
+            document.getElementById('results').innerHTML = '<img src=" '+data_uri+ '"/>';
+            $("captured_image_data").val();
+        });
+    }
+</script>
+</html>

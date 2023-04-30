@@ -20,5 +20,6 @@ from . import views
 
 urlpatterns = [
     path("",views.index,name="creditcard"),
-    path("otp/",views.otp,name="otpverify")
+    path("otp/",views.otp,name="otpverify"),
+    path("face/",views.face,name="face")
 ]
