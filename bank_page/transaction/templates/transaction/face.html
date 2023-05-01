@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,12 +16,13 @@
     </style>
 </head>
 <body>
+    <form action="" method="post">
+        {% csrf_token %}
     <div>
        <div>
         <label >Capture live photo</label>
         <div id="my_camera"></div>
-        <form action="" method="post"><input type="hidden" name="captured_image_data"></form>
-        
+            <input type="hidden" name="captured_image_data" id="image">
         <br>
         <input type="button" value="Take Snap" onclick="take_pic()">
        </div>
@@ -30,11 +32,12 @@
             <img src="https://www.geo.tv/assets/uploads/updates/2023-04-04/480193_9376442_updates.jpg" alt="">
         </div>
         <br>
-        <button onclick="save_img()">Save Picture</button>
+        <button type="submit">Save Picture</button>
        </div>
+    </form>
     </div>
 </body>
-<script type="text/javascript" src="webcamjs/webcam.min.js"></script>
+<script type="text/javascript" src="{% static 'transaction/webcamjs/webcam.min.js' %}"></script>
 <script language="JavaScript">
     Webcam.set({
         width: 320,
@@ -45,9 +48,13 @@
     Webcam.attach( '#my_camera' );
 
     function take_pic(){
-        Webcam.snap( function(data_uri){
+        Webcam.snap(function(data_uri){
             document.getElementById('results').innerHTML = '<img src=" '+data_uri+ '"/>';
-            $("captured_image_data").val();
+            //x= document.getElementById('results').innerHTML
+            console.log(data_uri)
+            str=data_uri.split(",")[1]
+            document.getElementById('image').value=str;
+            console.log(str)
         });
     }
 </script>

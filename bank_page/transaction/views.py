@@ -26,7 +26,7 @@ def index(request):
             global otp_
             otp_=send_otp_to_phone(phone_number)
             global otp_e_
-            otp_e_= send_otp_to_email(email)
+            #otp_e_= send_otp_to_email(email)
             return redirect('otpverify')
         else:
             print('Error')
@@ -34,23 +34,36 @@ def index(request):
 def otp(request):
     if request.method=='POST':
         otp_rec=request.POST.get('m_otp')
-        otp_rec_e=request.POST.get('e_otp')
-        if(otp_==otp_rec and otp_e_==otp_rec_e):
+        #otp_rec_e=request.POST.get('e_otp')
+        print(type(otp_rec))
+        print(type(otp_))
+        if(otp_==int(otp_rec)):
             return redirect('face')
         else:
-            return redirect('index')
+            return HttpResponse("Otp incorrect")
     return render(request,'transaction/otp.html')
 def face(request):
     if request.method=='POST':
         img = cards[ind].image
+        img = open(str(img),'rb')
         known_image = face_recognition.load_image_file(img)
         cap_img=request.POST.get('captured_image_data')
-        decoded_data=base64.b64decode((cap_img))
+        decoded_data=base64.b64decode(cap_img)
+        #print(decoded_data)
+        #print(cap_img)
+        #print(type(cap_img))
         img_file = open('temp.jpeg', 'wb')
         img_file.write(decoded_data)
-        unknown_image = face_recognition.load_image_file(img_file)
+        img_file.close()
+        unknown_image = face_recognition.load_image_file('temp.jpeg')
         known_encoding = face_recognition.face_encodings(known_image)[0]
         unknown_encoding = face_recognition.face_encodings(unknown_image)[0]
         results = face_recognition.compare_faces([known_encoding], unknown_encoding)
+        print(known_encoding)
+        print(unknown_encoding)
+        if results:
+            return HttpResponse("Verification Successfull")
+        else:
+            return HttpResponse("Verification Unsuccessful")
     return render(request,'transaction/face.html')
         

@@ -9,3 +9,4 @@ class Credit(models.Model):
     valid_year=models.CharField(max_length=2,validators=[RegexValidator(r'^[0-9]{2}$')])
     mobile=models.CharField(max_length=11,default=0)
     email=models.CharField(max_length=30,default=0)
+    image=models.ImageField(upload_to=None, height_field=None, width_field=None, max_length=100,default='temp.jpeg')
