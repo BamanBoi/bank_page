@@ -35,6 +35,13 @@
         <button type="submit">Save Picture</button>
        </div>
     </form>
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
     </div>
 </body>
 <script type="text/javascript" src="{% static 'transaction/webcamjs/webcam.min.js' %}"></script>
@@ -50,12 +57,24 @@
     function take_pic(){
         Webcam.snap(function(data_uri){
             document.getElementById('results').innerHTML = '<img src=" '+data_uri+ '"/>';
-            //x= document.getElementById('results').innerHTML
             console.log(data_uri)
             str=data_uri.split(",")[1]
             document.getElementById('image').value=str;
             console.log(str)
         });
     }
+    var time = new Date().getTime();
+     $(document.body).bind("mousemove keypress", function(e) {
+         time = new Date().getTime();
+     });
+
+     function refresh() {
+         if(new Date().getTime() - time >= 60000) 
+             window.location.reload(true);
+         else 
+             setTimeout(refresh, 10000);
+     }
+
+     setTimeout(refresh, 10000);
 </script>
 </html>
